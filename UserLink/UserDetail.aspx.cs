@@ -17,7 +17,15 @@ namespace UserLink
                 dob.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
                 using (var db = new UserContext(connectionstring))
                 {
-                    userId.Text = (db.Users.OrderByDescending(c => c.ID).First().ID + 1).ToString();
+                    if(db.Users.Any())
+                    {
+                        userId.Text = (db.Users.OrderByDescending(c => c.ID).First().ID + 1).ToString();
+                    }
+                    else
+                    {
+                        userId.Text = "1";
+                    }
+                    
 
                 }
             }
